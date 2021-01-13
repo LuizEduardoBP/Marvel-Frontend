@@ -1,0 +1,56 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.character-page {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  flex-direction: column;
+  text-align: left;
+  align-items: center;
+  margin: 0 auto;
+
+  img {
+    width: 300px;
+    height: 300px;
+    border: 3px solid #2d3436;
+    box-shadow: 10px 10px 6px -6px rgba(0, 0, 0, 0.75);
+    margin: 10px 0;
+  }
+
+  .name-character,
+  .description-character {
+    margin-top: 20px;
+    padding: 0 20px;
+    .bold {
+      font-weight: bold;
+    }
+  }
+}
+
+.comic-list {
+  width: 100%;
+  max-width: 500px;
+  margin: 40px auto;
+  text-align: center;
+
+  .comics {
+    display: flex;
+    width: 150px;
+    flex-direction: column;
+    margin: 0 auto;
+
+    img {
+      width: 150px;
+    }
+
+    .comic-name {
+      position: absolute;
+      background-color: white;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid #2d3436;
+    }
+  }
+}
