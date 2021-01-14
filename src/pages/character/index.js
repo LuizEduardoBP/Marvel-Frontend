@@ -7,6 +7,7 @@ import api from "../../services/api";
 
 export function Character() {
   const [comics, setComics] = useState([]);
+  const [series, setSeries] = useState([]);
   const location = useLocation();
   const data = location.state;
   const id = data.id;
@@ -28,7 +29,24 @@ export function Character() {
     getComic();
   }, [id]);
 
-  console.log(comics);
+  useEffect(() => {
+    async function getSeries() {
+      try {
+        const key =
+          "?ts=1&apikey=af95085f5056fbb00e65e3bc94a455f2&hash=dca3d9faf47973b9c730b8e14b587db9";
+        const { data } = await api.get(
+          `/v1/public/characters/${id}/series${key}`
+        );
+        const serie = data.data.results;
+        setSeries(serie);
+      } catch (error) {
+        console.error("Erro ao buscar dados", error);
+      }
+    }
+    getSeries();
+  }, [id]);
+
+  console.log(series);
   return (
     <>
       <Header />
@@ -53,24 +71,46 @@ export function Character() {
         </div>
       </div>
 
-      <div className="comic-list">
-        <h1>Comics</h1>
-        <Slider>
-          {comics.length === 0 ? (
-            <div className="comics"></div>
-          ) : (
-            comics.map((item) => {
-              return (
-                <div className="comics">
-                  <img
-                    src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-                    alt=""
-                  />
-                </div>
-              );
-            })
-          )}
-        </Slider>
+      <div className="list-section">
+        <div className="list">
+          <h1>Comics</h1>
+          <Slider>
+            {comics.length === 0 ? (
+              <div className="comics"></div>
+            ) : (
+              comics.map((item) => {
+                return (
+                  <div className="comics">
+                    <img
+                      src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                      alt=""
+                    />
+                  </div>
+                );
+              })
+            )}
+          </Slider>
+        </div>
+
+        <div className="list">
+          <h1>Series</h1>
+          <Slider>
+            {series.length === 0 ? (
+              <div className="comics"></div>
+            ) : (
+              series.map((item) => {
+                return (
+                  <div className="comics">
+                    <img
+                      src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                      alt=""
+                    />
+                  </div>
+                );
+              })
+            )}
+          </Slider>
+        </div>
       </div>
     </>
   );

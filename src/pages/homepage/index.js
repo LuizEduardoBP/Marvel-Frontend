@@ -50,8 +50,6 @@ export function Homepage() {
     Search();
   }, [search]);
 
-  console.log(searchedData);
-
   const data = search === "" ? character.character : searchedData;
 
   return (
